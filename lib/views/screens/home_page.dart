@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:online_shop_animation/views/screens/room_page.dart';
+import 'package:online_shop_animation/views/widgets/custom_dialog.dart';
 import 'package:online_shop_animation/views/widgets/product_count.dart';
 import 'package:online_shop_animation/views/widgets/product_grid.dart';
 
@@ -48,7 +49,14 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         shape: const CircleBorder(),
         backgroundColor: const Color(0xff6D8D54),
-        onPressed: () {},
+        onPressed: () {
+          showModalBottomSheet(
+              isScrollControlled: true,
+              context: context,
+              builder: (context) {
+                return const CustomSheet();
+              });
+        },
         child: const Icon(
           Icons.shopping_bag_outlined,
           color: Colors.white,

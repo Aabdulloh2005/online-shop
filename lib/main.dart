@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:online_shop_animation/controller/order_controller.dart';
 import 'package:online_shop_animation/controller/product_controller.dart';
 import 'package:online_shop_animation/views/screens/home_page.dart';
 import 'package:provider/provider.dart';
@@ -16,6 +17,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (ctx) {
           return ProductController();
+        }),
+        ChangeNotifierProvider(create: (ctx) {
+          return CartController();
         }),
       ],
       builder: (context, child) {

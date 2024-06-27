@@ -42,7 +42,7 @@ class ProductController extends ChangeNotifier {
       productInfo: 'Intel i7, 16GB RAM, 512GB SSD, GTX 1660Ti',
       rating: 4.8,
       price: 1299.99,
-      firstColorImage: 'gaming_laptop',
+      firstColorImage: 'laptop',
       isLiked: true,
     ),
     ProductModel(
@@ -62,7 +62,7 @@ class ProductController extends ChangeNotifier {
       productInfo: 'Waterproof, 12-hour battery life, built-in mic',
       rating: 4.3,
       price: 59.99,
-      firstColorImage: 'bluetooth_speaker',
+      firstColorImage: 'speaker',
       isLiked: true,
     ),
     ProductModel(
@@ -72,7 +72,7 @@ class ProductController extends ChangeNotifier {
       productInfo: '128GB storage, 48MP camera, 5G support',
       rating: 4.7,
       price: 899.99,
-      firstColorImage: 'smartphone',
+      firstColorImage: 'phone',
       isLiked: false,
     ),
     ProductModel(
@@ -92,7 +92,7 @@ class ProductController extends ChangeNotifier {
       productInfo: '8GB storage, adjustable backlight, Wi-Fi',
       rating: 4.5,
       price: 129.99,
-      firstColorImage: 'ereader',
+      firstColorImage: 'e_reader',
       isLiked: false,
     ),
   ];

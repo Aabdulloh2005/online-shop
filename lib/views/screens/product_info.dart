@@ -2,19 +2,24 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
+import 'package:online_shop_animation/controller/order_controller.dart';
 import 'package:online_shop_animation/controller/product_controller.dart';
 import 'package:online_shop_animation/models/product_model.dart';
+import 'package:online_shop_animation/views/widgets/custom_dialog.dart';
 import 'package:provider/provider.dart';
 
 class ProductInfo extends StatelessWidget {
   final int index;
 
-  const ProductInfo({super.key, required this.index});
-
+  ProductInfo({super.key, required this.index});
+  bool toggled = false;
+  int counter = 0;
   @override
   Widget build(BuildContext context) {
+    final product = Provider.of<ProductModel>(context, listen: false);
+
     return Scaffold(
-      floatingActionButton: _buildFloatingActionButton(),
+      floatingActionButton: _buildFloatingActionButton(context, product),
       appBar: _buildAppBar(context),
       body: Consumer<ProductController>(
         builder: (context, controller, child) {
@@ -25,7 +30,8 @@ class ProductInfo extends StatelessWidget {
     );
   }
 
-  Widget _buildFloatingActionButton() {
+  Widget _buildFloatingActionButton(
+      BuildContext context, ProductModel product) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.end,
       mainAxisAlignment: MainAxisAlignment.end,
@@ -35,45 +41,50 @@ class ProductInfo extends StatelessWidget {
               duration: 500.milliseconds,
               begin: 10,
               end: 0,
-              builder: (_, value, __) => Container(
-                width: 270,
-                height: 50,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: const Color(0xff6D8D54),
-                ),
-                child: const Center(
-                  child: Text(
-                    "Add to Cart",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
+              builder: (_, value, __) => GestureDetector(
+                onTap: () {
+                  context.read<CartController>().addToCart(
+                      context.read<ProductController>().product[index]);
+                },
+                child: Container(
+                  width: 270,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: const Color(0xff6D8D54),
+                  ),
+                  child: Consumer<CartController>(
+                    builder: (context, controller, child) {
+                      return controller.isInCart(product.id)
+                          ? Center(
+                              child: Text(
+                                controller
+                                    .getProductAmount(product.id)
+                                    .toString(),
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            )
+                          : const Center(
+                              child: Text(
+                                "Add to cart",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            );
+                    },
                   ),
                 ),
               ),
             )
             .slideY(begin: 0.20, end: 0.0)
             .fadeIn(),
-        // Container(
-        //   width: 270,
-        //   height: 50,
-        //   decoration: BoxDecoration(
-        //     borderRadius: BorderRadius.circular(10),
-        //     color: const Color(0xff6D8D54),
-        //   ),
-        //   child: const Center(
-        //     child: Text(
-        //       "Add to Cart",
-        //       style: TextStyle(
-        //         color: Colors.white,
-        //         fontSize: 20,
-        //         fontWeight: FontWeight.bold,
-        //       ),
-        //     ),
-        //   ),
-        // ),
         const Gap(10),
         Column(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -91,16 +102,18 @@ class ProductInfo extends StatelessWidget {
                 )
                 .slideY(begin: 0.20, end: 0.0)
                 .fadeIn(),
-            // const Icon(
-            //   CupertinoIcons.heart_circle_fill,
-            //   color: Color(0xffCCC5AD),
-            //   size: 55,
-            // ),
             const Gap(10),
             FloatingActionButton(
               shape: const CircleBorder(),
               backgroundColor: const Color(0xff6D8D54),
-              onPressed: () {},
+              onPressed: () {
+                showModalBottomSheet(
+                    isScrollControlled: true,
+                    context: context,
+                    builder: (context) {
+                      return const CustomSheet();
+                    });
+              },
               child: const Icon(
                 Icons.shopping_bag_outlined,
                 color: Colors.white,
@@ -320,13 +333,14 @@ class ProductImage extends StatelessWidget {
                         ),
                         Text(
                           product.description,
+                          maxLines: 2,
                           textAlign: TextAlign.right,
                           style: const TextStyle(
-                            fontSize: 30,
+                            fontSize: 24,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const Gap(20),
+                        const Gap(40),
                         const Text(
                           "Price",
                           style: TextStyle(color: Color(0xffCCC5AD)),

@@ -16,8 +16,11 @@ class ProductItem extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (context) => ProductInfo(index: index),
+          CupertinoPageRoute(
+            builder: (context) => ChangeNotifierProvider.value(
+              value: product,
+              child: ProductInfo(index: index),
+            ),
           ),
         );
       },
@@ -114,7 +117,11 @@ class ProductItem extends StatelessWidget {
             left: -10,
             right: 40,
             top: 0,
-            child: Image.asset("assets/images/${product.firstColorImage}.png"),
+            child: Image.asset(
+              "assets/images/${product.firstColorImage}.png",
+              height: 130,
+              width: 130,
+            ),
           ),
         ],
       ),
