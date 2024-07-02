@@ -2,6 +2,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:online_shop_animation/controller/user_controller.dart';
+import 'package:online_shop_animation/views/screens/profile_screen.dart';
 import 'package:online_shop_animation/views/screens/room_page.dart';
 import 'package:online_shop_animation/views/widgets/custom_dialog.dart';
 import 'package:online_shop_animation/views/widgets/product_count.dart';
@@ -34,14 +36,23 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: const [
+        actions: [
           Icon(CupertinoIcons.bell),
           Gap(10),
           Icon(CupertinoIcons.search),
           Gap(10),
-          CircleAvatar(
-            radius: 15,
-            backgroundImage: AssetImage("assets/images/person.png"),
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(
+                CupertinoPageRoute(
+                  builder: (context) => const ProfileScreen(),
+                ),
+              );
+            },
+            child: const CircleAvatar(
+              radius: 15,
+              backgroundImage: AssetImage("assets/images/person.png"),
+            ),
           ),
           Gap(10),
         ],
@@ -114,6 +125,19 @@ class _HomePageState extends State<HomePage> {
                 "Admin Page",
                 style: TextStyle(
                   color: Colors.green,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                UserController().signOut();
+              },
+              child: const Text(
+                "Sign Out",
+                style: TextStyle(
+                  color: Colors.red,
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),

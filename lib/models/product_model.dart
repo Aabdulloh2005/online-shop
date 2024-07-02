@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class ProductModel extends ChangeNotifier {
@@ -20,4 +21,17 @@ class ProductModel extends ChangeNotifier {
     required this.firstColorImage,
     required this.isLiked,
   });
+
+  factory ProductModel.fromJson(QueryDocumentSnapshot snap) {
+    return ProductModel(
+      id: snap.id,
+      title: snap["title"],
+      description: snap["description"],
+      productInfo: snap["productInfo"],
+      rating: snap["rating"],
+      price: snap['price'],
+      firstColorImage: snap['firstColorImage'],
+      isLiked: snap['isLiked'],
+    );
+  }
 }

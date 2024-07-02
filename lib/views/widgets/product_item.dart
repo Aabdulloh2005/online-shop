@@ -14,6 +14,7 @@ class ProductItem extends StatelessWidget {
     final product = Provider.of<ProductModel>(context, listen: false);
     return GestureDetector(
       onTap: () {
+        print(index);
         Navigator.push(
           context,
           CupertinoPageRoute(

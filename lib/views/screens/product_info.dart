@@ -21,12 +21,7 @@ class ProductInfo extends StatelessWidget {
     return Scaffold(
       floatingActionButton: _buildFloatingActionButton(context, product),
       appBar: _buildAppBar(context),
-      body: Consumer<ProductController>(
-        builder: (context, controller, child) {
-          final product = controller.product[index];
-          return ProductDetail(product: product);
-        },
-      ),
+      body: ProductDetail(product: product),
     );
   }
 
@@ -43,8 +38,8 @@ class ProductInfo extends StatelessWidget {
               end: 0,
               builder: (_, value, __) => GestureDetector(
                 onTap: () {
-                  context.read<CartController>().addToCart(
-                      context.read<ProductController>().product[index]);
+                  // context.read<CartController>().addToCart(
+                  //     context.read<ProductController>().product[index]);
                 },
                 child: Container(
                   width: 270,

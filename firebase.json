@@ -1,0 +1,22 @@
+{
+    "flutter": {
+        "platforms": {
+            "android": {
+                "default": {
+                    "projectId": "uzum-shop",
+                    "appId": "1:769928819331:android:57f6316744acd5ff6de1b6",
+                    "fileOutput": "android/app/google-services.json"
+                }
+            },
+            "dart": {
+                "lib/firebase_options.dart": {
+                    "projectId": "uzum-shop",
+                    "configurations": {
+                        "android": "1:769928819331:android:57f6316744acd5ff6de1b6",
+                        "web": "1:769928819331:web:95ec924ce69ff3106de1b6"
+                    }
+                }
+            }
+        }
+    }
+}

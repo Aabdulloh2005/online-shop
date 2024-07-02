@@ -10,14 +10,15 @@ class ProductCount extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<ProductController>(
       builder: (context, productController, child) {
+        // print(productController.product.length.asStream());
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                'Have ${productController.product.length} products',
-                style: const TextStyle(
+              const Text(
+                'Have ',
+                style: TextStyle(
                   fontSize: 20,
                   color: Colors.black,
                   fontWeight: FontWeight.bold,

@@ -38,6 +38,11 @@ dependencies:
   carousel_slider: ^4.2.1
   provider: ^6.1.2
   flutter_animate: ^4.5.0
+  cloud_firestore: ^5.0.2
+  firebase_auth: ^5.1.1
+  firebase_storage: ^12.1.0
+  firebase_core: ^3.1.1
+  image_picker: ^1.1.2
 
 dev_dependencies:
   flutter_test:
@@ -64,7 +69,6 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
-  #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
